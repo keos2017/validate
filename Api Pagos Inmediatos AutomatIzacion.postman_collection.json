@@ -1,0 +1,836 @@
+{
+	"info": {
+		"_postman_id": "8775d2c5-5ec7-4566-a90b-27aee6b76efd",
+		"name": "Api Pagos Inmediatos Automatizacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17627151"
+	},
+	"item": [
+		{
+			"name": "validate",
+			"item": [
+				{
+					"name": "ExchangeKey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"sessionId\", JSON.parse(responseBody).response.sessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"publicKey\": \"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKgkX8l6mQr9gNyabAztYTfSFg\\ns2NegXTtykMVKzeaXUud2OCPDUiPFRrN2OLpsr1iJ+0zw3a71JFG/qD0WbRFWZkn\\nNBTcnp2e/ZwpkXe3/Six3hwwzHtEiVy6dnZEympUx5pys88TAVhbPrQG4YK0HMTU\\np+DOqXCsobTh4R1s1QIDAQAB\\n-----END PUBLIC KEY-----\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/auth/exchangeKey/",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-communications",
+								"auth",
+								"exchangeKey",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Cognito",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"accessToken\", JSON.parse(responseBody).response.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"authorization\": \"Basic NDdlaXFibm50YXI1MGtvMzA4ZDJqbWltOXI6ZmRtNnJpZHFuMmplOGFhaWtwbGZmaDVyam1mODdmZWJuaG1lYmpvNnEydHRmdGlpNnJx\",\r\n    \"sessionId\": \"{{sessionId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/api/auth/tokenCognito",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-communications",
+								"api",
+								"auth",
+								"tokenCognito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"pm.globals.get(\"fiid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionId\": \"{{sessionId}}\",\r\n    \"fiid\": {{fiid}},\r\n    \"phone\": \"{{phone}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/validate",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-person",
+								"api",
+								"person",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "queryByPerson",
+			"item": [
+				{
+					"name": "ExchangeKey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"sessionId\", JSON.parse(responseBody).response.sessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"publicKey\": \"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKgkX8l6mQr9gNyabAztYTfSFg\\ns2NegXTtykMVKzeaXUud2OCPDUiPFRrN2OLpsr1iJ+0zw3a71JFG/qD0WbRFWZkn\\nNBTcnp2e/ZwpkXe3/Six3hwwzHtEiVy6dnZEympUx5pys88TAVhbPrQG4YK0HMTU\\np+DOqXCsobTh4R1s1QIDAQAB\\n-----END PUBLIC KEY-----\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/auth/exchangeKey/",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-communications",
+								"auth",
+								"exchangeKey",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Cognito",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"accessToken\", JSON.parse(responseBody).response.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"authorization\": \"Basic NDdlaXFibm50YXI1MGtvMzA4ZDJqbWltOXI6ZmRtNnJpZHFuMmplOGFhaWtwbGZmaDVyam1mODdmZWJuaG1lYmpvNnEydHRmdGlpNnJx\",\r\n    \"sessionId\": \"{{sessionId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/api/auth/tokenCognito",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-communications",
+								"api",
+								"auth",
+								"tokenCognito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "queryByPerson",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "eyJraWQiOiIyXC9cL3M2aGJBbU1obFk2eWJyMkU1a0VjeXpGR0l5dVppUDlIaWRyTVg4TnM9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0N2VpcWJubnRhcjUwa28zMDhkMmptaW05ciIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoibGFiLW1iYWFzXC9hdGgtcDJtIGh0dHBzOlwvXC9sYWItdnNzaDIudmFsaWRzb2x1dGlvbnMuY29tLmJyXC9jb21tZXJjZSBodHRwczpcL1wvbGFiLXZzc2gyLnZhbGlkc29sdXRpb25zLmNvbS5iclwvcGVyc29uIGxhYi1tYmFhc1wvY29tbXVuaWNhdGlvbiBsYWItbWJhYXNcL2xvZ2luIGxhYi1tYmFhc1wvY29tbWVyY2UgbGFiLW1iYWFzXC9wZXJzb24gbGFiLW1iYWFzXC9hZG1pbiBodHRwczpcL1wvbGFiLXZzc2gyLnZhbGlkc29sdXRpb25zLmNvbS5iclwvYWRtaW4iLCJhdXRoX3RpbWUiOjE2NTU4MjQ4NzIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX2wxNlAzZ05QUyIsImV4cCI6MTY1NTgyODQ3MiwiaWF0IjoxNjU1ODI0ODcyLCJ2ZXJzaW9uIjoyLCJqdGkiOiI3ZTdlZTA2Mi1mMzc1LTRhMjgtOGEzYS03ZDExMzIyNWY1MmQiLCJjbGllbnRfaWQiOiI0N2VpcWJubnRhcjUwa28zMDhkMmptaW05ciJ9.RbHADzoTC4Zt34MgwJkSx2HPLaHlQLncDul8VKxCUlV0kNQpUEOBM4tfUr8EFwJ0ONPOXqug4QB5NthllWzsSd-n_zkfINlUoBEK1ceth06JotzoIK_IGTFZrgQwI-eCobCwCHLOXux7XZzgytsggpTLTsk9W7_bY-RR9FmmTR0KpGPDeJtkouwJ2UtyGbSqrL049drtvQVydaEt3XtW2kojAPwUBsgiXuUu9iyTpqvXK7AoubDtzJBYQJi1LeFUaPl425kbY8aSUt6RO0MHyJW296H_e2GYuBg59Bja-i-_R2IIPVisDyI4QhMqTzIS0UGAlBmIa_8uMAwpv94TEA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionId\": \"{{sessionId}}\",\r\n    \"fiid\": {{fiid}},\r\n    \"phone\": \"{{phone}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/queryByPerson",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-person",
+								"api",
+								"person",
+								"queryByPerson"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "registre",
+			"item": [
+				{
+					"name": "ExchangeKey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"sessionId\", JSON.parse(responseBody).response.sessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"publicKey\": \"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKgkX8l6mQr9gNyabAztYTfSFg\\ns2NegXTtykMVKzeaXUud2OCPDUiPFRrN2OLpsr1iJ+0zw3a71JFG/qD0WbRFWZkn\\nNBTcnp2e/ZwpkXe3/Six3hwwzHtEiVy6dnZEympUx5pys88TAVhbPrQG4YK0HMTU\\np+DOqXCsobTh4R1s1QIDAQAB\\n-----END PUBLIC KEY-----\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/auth/exchangeKey/",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-communications",
+								"auth",
+								"exchangeKey",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Cognito",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"accessToken\", JSON.parse(responseBody).response.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"authorization\": \"Basic NDdlaXFibm50YXI1MGtvMzA4ZDJqbWltOXI6ZmRtNnJpZHFuMmplOGFhaWtwbGZmaDVyam1mODdmZWJuaG1lYmpvNnEydHRmdGlpNnJx\",\r\n    \"sessionId\": \"{{sessionId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/api/auth/tokenCognito",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-communications",
+								"api",
+								"auth",
+								"tokenCognito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionId\": \"{{sessionId}}\",\r\n    \"fiid\": {{fiid}},\r\n    \"person\": {\r\n        \"phone\": \"+{{phone}}\",\r\n        \"iban\": \"{{iban}}\",\r\n        \"idType\": {{idType}},\r\n        \"idNumber\": \"{{idNumber}}\",\r\n        \"name\": \"{{name1}}\",\r\n        \"lastName1\": \"{{lastName1}}\",\r\n        \"lastName2\": \"{{lastName2}}\",\r\n        \"email\": \"{{email}}\",\r\n        \"status\": {{status}},\r\n        \"address\": {\r\n            \"province\": {{province}},\r\n            \"town\": {{town}},\r\n            \"type\": \"{{type}}\",\r\n            \"door\": \"{{door}}\",\r\n            \"floor\": \"{{floor}}\",\r\n            \"name\": \"{{name}}\",\r\n            \"number\": {{number}},\r\n            \"portal\": \"{{portal}}\",\r\n            \"stairs\": \"{{stairs}}\",\r\n            \"zipCode\": \"{{zipCode}}\"\r\n        }\r\n    },\r\n    \"portabilityCode\": {{portabilityCode}},\r\n    \"version\": {{version}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/register",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-person",
+								"api",
+								"person",
+								"register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "registrePortabilidad",
+			"item": [
+				{
+					"name": "ExchangeKey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"sessionId\", JSON.parse(responseBody).response.sessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"publicKey\": \"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKgkX8l6mQr9gNyabAztYTfSFg\\ns2NegXTtykMVKzeaXUud2OCPDUiPFRrN2OLpsr1iJ+0zw3a71JFG/qD0WbRFWZkn\\nNBTcnp2e/ZwpkXe3/Six3hwwzHtEiVy6dnZEympUx5pys88TAVhbPrQG4YK0HMTU\\np+DOqXCsobTh4R1s1QIDAQAB\\n-----END PUBLIC KEY-----\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/auth/exchangeKey/",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-communications",
+								"auth",
+								"exchangeKey",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Cognito",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"accessToken\", JSON.parse(responseBody).response.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"authorization\": \"Basic NDdlaXFibm50YXI1MGtvMzA4ZDJqbWltOXI6ZmRtNnJpZHFuMmplOGFhaWtwbGZmaDVyam1mODdmZWJuaG1lYmpvNnEydHRmdGlpNnJx\",\r\n    \"sessionId\": \"{{sessionId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/api/auth/tokenCognito",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-communications",
+								"api",
+								"auth",
+								"tokenCognito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Se intentó insertar un elemento ya existente\", function () {\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.expect(jsonData.code).to.eql('4');\r",
+									"});\r",
+									"\r",
+									"const portabilidad  = pm.response.json();\r",
+									"pm.environment.set(\"message\", portabilidad.message.substring(131, 137));\r",
+									"console.log(portabilidad);\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionId\": \"{{sessionId}}\",\r\n    \"fiid\": {{fiid}},\r\n    \"person\": {\r\n        \"phone\": \"+{{phone}}\",\r\n        \"iban\": \"{{iban}}\",\r\n        \"idType\": {{idType}},\r\n        \"idNumber\": \"{{idNumber}}\",\r\n        \"name\": \"{{name1}}\",\r\n        \"lastName1\": \"{{lastName1}}\",\r\n        \"lastName2\": \"{{lastName2}}\",\r\n        \"email\": \"{{email}}\",\r\n        \"status\": {{status}},\r\n        \"address\": {\r\n            \"province\": {{province}},\r\n            \"town\": {{town}},\r\n            \"type\": \"{{type}}\",\r\n            \"door\": \"{{door}}\",\r\n            \"floor\": \"{{floor}}\",\r\n            \"name\": \"{{name}}\",\r\n            \"number\": {{number}},\r\n            \"portal\": \"{{portal}}\",\r\n            \"stairs\": \"{{stairs}}\",\r\n            \"zipCode\": \"{{zipCode}}\"\r\n        }\r\n    },\r\n    \"version\": {{version}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/register",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-person",
+								"api",
+								"person",
+								"register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerPortabilidad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionId\": \"{{sessionId}}\",\r\n    \"fiid\": {{fiid}},\r\n    \"person\": {\r\n        \"phone\": \"+{{phone}}\",\r\n        \"iban\": \"{{iban}}\",\r\n        \"idType\": {{idType}},\r\n        \"idNumber\": \"{{idNumber}}\",\r\n        \"name\": \"{{name1}}\",\r\n        \"lastName1\": \"{{lastName1}}\",\r\n        \"lastName2\": \"{{lastName2}}\",\r\n        \"email\": \"{{email}}\",\r\n        \"status\": {{status}},\r\n        \"address\": {\r\n            \"province\": {{province}},\r\n            \"town\": {{town}},\r\n            \"type\": \"{{type}}\",\r\n            \"door\": \"{{door}}\",\r\n            \"floor\": \"{{floor}}\",\r\n            \"name\": \"{{name}}\",\r\n            \"number\": {{number}},\r\n            \"portal\": \"{{portal}}\",\r\n            \"stairs\": \"{{stairs}}\",\r\n            \"zipCode\": \"{{zipCode}}\"\r\n        }\r\n    },\r\n    \"portabilityCode\": \"{{message}}\",\r\n    \"version\": {{version}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/register",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"rbm-instant-payments-person",
+								"api",
+								"person",
+								"register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
