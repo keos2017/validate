@@ -53,11 +53,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/auth/exchangeKey/",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-communications/auth/exchangeKey/",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-communications",
 								"auth",
 								"exchangeKey",
@@ -102,11 +103,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/api/auth/tokenCognito",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-communications/api/auth/tokenCognito",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-communications",
 								"api",
 								"auth",
@@ -167,11 +169,12 @@
 							"raw": "{\r\n    \"sessionId\": \"{{sessionId}}\",\r\n    \"fiid\": {{fiid}},\r\n    \"phone\": \"{{phone}}\"\r\n}"
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/validate",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-person/api/person/validate",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-person",
 								"api",
 								"person",
@@ -230,11 +233,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/auth/exchangeKey/",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-communications/auth/exchangeKey/",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-communications",
 								"auth",
 								"exchangeKey",
@@ -279,11 +283,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/api/auth/tokenCognito",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-communications/api/auth/tokenCognito",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-communications",
 								"api",
 								"auth",
@@ -344,11 +349,12 @@
 							"raw": "{\r\n    \"sessionId\": \"{{sessionId}}\",\r\n    \"fiid\": {{fiid}},\r\n    \"phone\": \"{{phone}}\"\r\n}"
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/queryByPerson",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-person/api/person/queryByPerson",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-person",
 								"api",
 								"person",
@@ -407,11 +413,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/auth/exchangeKey/",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-communications/auth/exchangeKey/",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-communications",
 								"auth",
 								"exchangeKey",
@@ -456,11 +463,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/api/auth/tokenCognito",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-communications/api/auth/tokenCognito",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-communications",
 								"api",
 								"auth",
@@ -525,11 +533,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/register",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-person/api/person/register",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-person",
 								"api",
 								"person",
@@ -595,11 +604,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/auth/exchangeKey/",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-communications/auth/exchangeKey/",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-communications",
 								"auth",
 								"exchangeKey",
@@ -644,11 +654,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-communications/api/auth/tokenCognito",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-communications/api/auth/tokenCognito",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-communications",
 								"api",
 								"auth",
@@ -735,11 +746,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/register",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-person/api/person/register",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-person",
 								"api",
 								"person",
@@ -814,11 +826,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL_BASE}}/rbm-instant-payments-person/api/person/register",
+							"raw": "{{URL_BASE}}/api-gateway/rbm-instant-payments-person/api/person/register",
 							"host": [
 								"{{URL_BASE}}"
 							],
 							"path": [
+								"api-gateway",
 								"rbm-instant-payments-person",
 								"api",
 								"person",
